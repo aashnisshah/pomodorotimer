@@ -1,22 +1,25 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 // one way to display content
 // class component - can have a state
 class App extends React.Component {
-  render(){
-  	// using HTML/JSX: 
-    return (
-    	<div>
-    		<h1>Hello World</h1>
-    		<b>This is me</b>
-    	</div>
-    );
-    // using React native
-    // return React.createElement('h1', null, 'Hello World')
-  }
+	render(){
+		let txt = this.props.txt
+		return <h1>{txt}</h1>
+	}
 }
 
-// stateless component with no state
-// const App = () => <h1>Hello World</h1>
+App.propTypes = {
+	txt: React.PropTypes.string,
+	cat: React.PropTypes.number.isRequired
+}
 
-export default App
+App.defaultProps = {
+	txt: 'Header Text'
+}
+
+ReactDOM.render(
+	<App cat={5} txt="Hello World" />,
+	document.getElementById('app')
+);

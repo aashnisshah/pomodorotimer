@@ -5,7 +5,7 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			val: 3
+			val: 300
 		}
 		this.update = this.update.bind(this);
 	}
@@ -25,7 +25,20 @@ class App extends React.Component {
 		if(this.state.val <= 0) {
 			return <h1>Timer is finished</h1>
 		} else {
-			return <button onClick={this.update}>{this.state.val}</button>
+			var divStyle = {
+				'borderRadius': '50%',
+				border: '3px solid #d9534f',
+				'backgroundColor': 'pink',
+				padding: '20vh',
+				'fontSize': '10em'
+			};
+			return (
+				<div className="btn-group" style={divStyle}>
+					{this.state.val}
+				</div>
+
+				// <button onClick={this.update}>{this.state.val}</button>
+			)
 		}
 	}
 	componentDidMount() {
@@ -45,17 +58,39 @@ class Wrapper extends React.Component {
 		super();
 	}
 	mount() {
-		ReactDOM.render(<App />, document.getElementById('a'))
+		ReactDOM.render(<App />, document.getElementById('countdown'))
 	}
 	unmount() {
-		ReactDOM.unmountComponentAtNode(document.getElementById('a'))
+		ReactDOM.unmountComponentAtNode(document.getElementById('countdown'))
+		ReactDOM.render(<App />, document.getElementById('countdown'))
 	}
 	render() {
 		return (
 			<div>
-				<button onClick={this.mount.bind(this)}>Start</button>
-				<button onClick={this.unmount.bind(this)}>Reset</button>
-				<div id="a"></div>
+				<div className="btn-group">
+					<button
+						onClick={this.mount.bind(this)}
+						type="button"
+						className="btn btn-success"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false">
+					Start
+					</button>
+				</div>
+
+				<div className="btn-group">
+					<button
+						onClick={this.unmount.bind(this)}
+						type="button"
+						className="btn btn-danger"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false">
+					Reset
+					</button>
+				</div>
+				<div id="countdown"></div>
 			</div>
 		)
 	}

@@ -22,7 +22,11 @@ class App extends React.Component {
 	}
 	render() {
 		console.log('rendering')
-		return <button onClick={this.update}>{this.state.val}</button>
+		if(this.state.val <= 0) {
+			return <h1>Timer is finished</h1>
+		} else {
+			return <button onClick={this.update}>{this.state.val}</button>
+		}
 	}
 	componentDidMount() {
 		// after component exists in the DOM

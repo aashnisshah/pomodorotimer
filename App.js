@@ -5,12 +5,18 @@ class App extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			val: 300
+			val: 300,
+			min: 5,
+			sec: '00'
 		}
 		this.update = this.update.bind(this);
 	}
 	update() {
-		this.setState({val: this.state.val - 1})
+		this.setState({
+			val: this.state.val - 1,
+			min: Math.floor(this.state.val / 60),
+			sec: ('0' + this.state.val % 60).slice(-2)	
+		})
 		if (this.state.val <= 0) {
 			clearInterval(this.inc)
 			console.log('timer done')
@@ -34,7 +40,7 @@ class App extends React.Component {
 			};
 			return (
 				<div className="btn-group" style={divStyle}>
-					{this.state.val}
+					{this.state.min}:{this.state.sec}
 				</div>
 
 				// <button onClick={this.update}>{this.state.val}</button>

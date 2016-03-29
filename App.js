@@ -68,9 +68,9 @@ class Wrapper extends React.Component {
 		}
 	}
 	mount() {
-		let counter = parseInt(this.state.startCounter) > 4 ? 1 : this.state.startCounter + 1
+		let counter = this.state.startCounter % 5
 		this.setState({
-			startCounter: counter,
+			startCounter: this.state.startCounter + 1,
 			startMessage: (5 - counter) + ' countdowns before taking a break'
 		})
 		ReactDOM.render(<App />, document.getElementById('countdown'))

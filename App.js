@@ -62,13 +62,21 @@ class App extends React.Component {
 class Wrapper extends React.Component {
 	constructor() {
 		super();
+		this.state = {
+			startCounter: 0,
+			startMessage: 'Pomodoro Time!'
+		}
 	}
 	mount() {
+		let counter = parseInt(this.state.startCounter) > 4 ? 1 : this.state.startCounter + 1
+		this.setState({
+			startCounter: counter,
+			startMessage: (5 - counter) + ' countdowns before taking a break'
+		})
 		ReactDOM.render(<App />, document.getElementById('countdown'))
 	}
 	unmount() {
 		ReactDOM.unmountComponentAtNode(document.getElementById('countdown'))
-		ReactDOM.render(<App />, document.getElementById('countdown'))
 	}
 	update(e) {
 		//  hook up to global variable for time
@@ -76,6 +84,9 @@ class Wrapper extends React.Component {
 	render() {
 		return (
 			<div>
+				<div>
+					<h2>{this.state.startMessage}</h2>
+				</div>
 				<NumInput
 						ref="red"
 						min={0}
